@@ -4,6 +4,9 @@
   "description": "A stripped down version of google drivet",
   "main": "src/server.js",
   "scripts": {
+    "setup": "npm install && npm run migrate && npm run generate",
+    "migrate": "npx prisma migrate deploy",
+    "generate": "npx prisma generate --no-engine",
     "start": "node src/server.js"
   },
   "keywords": [],
