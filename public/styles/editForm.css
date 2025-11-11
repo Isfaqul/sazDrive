@@ -30,7 +30,7 @@ header {
 
 main {
   max-width: 480px;
-  padding-bottom: 1em;
+  padding-bottom: 4em;
 
   .hero-title {
     font-family: var(--font-sofia);

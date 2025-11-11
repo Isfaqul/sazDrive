@@ -47,7 +47,7 @@ header {
 
 main {
   padding: 0 1em;
-  padding-bottom: 1em;
+  padding-bottom: 4em;
 
   .hero-title-row {
     display: flex;
