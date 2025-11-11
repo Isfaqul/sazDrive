@@ -7,7 +7,7 @@ const loginGet = (req, res, next) => {
   if (!req.user) {
     res.render("pages/login", { title: "Login", errors: [] });
   } else {
-    res.redirect("/");
+    res.redirect("/drive");
   }
 };
 
@@ -35,7 +35,7 @@ const loginPost = [
 
       req.logIn(user, (error) => {
         if (error) return next(error);
-        return res.redirect("/");
+        return res.redirect("/drive");
       });
     })(req, res, next);
   },
@@ -55,7 +55,7 @@ const signupGet = (req, res, next) => {
   if (!req.user) {
     res.render("pages/signup", { title: "Signup", errors: [] });
   } else {
-    res.redirect("/");
+    res.redirect("/drive");
   }
 };
 
@@ -80,7 +80,7 @@ const signupPost = [
           },
         });
 
-        res.redirect("/login");
+        res.redirect("/auth/login");
       } catch (error) {
         console.log(error);
         return res.render("pages/signup", {
