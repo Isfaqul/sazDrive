@@ -296,7 +296,13 @@ main {
   .folder {
     .folder-title-row {
       padding-block: 2em;
+
+      svg {
+        width: 24px;
+        height: auto;
+      }
     }
+
     .folder-action {
       padding: 0.5em 1.2em 0.5em 0;
 
@@ -336,16 +342,6 @@ main {
 }
 
 @media screen and (max-width: 430px) {
-  .file-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .folder-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-@media screen and (max-width: 320px) {
   .file-grid {
     grid-template-columns: repeat(1, 1fr);
   }
