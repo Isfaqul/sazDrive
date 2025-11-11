@@ -294,12 +294,15 @@ main {
   }
 
   .folder {
+    .folder-title-row {
+      padding-block: 2em;
+    }
     .folder-action {
       padding: 0.5em 1.2em 0.5em 0;
 
       .btn.icon-btn {
-        height: 28px;
-        width: 28px;
+        height: 32px;
+        width: 32px;
 
         svg {
           width: 16px;
@@ -310,10 +313,18 @@ main {
   }
 
   .file {
+    .file-title-row {
+      margin: 1em 0 0 0;
+    }
+
+    .file-title {
+      margin-block: 0;
+    }
+
     .file-action {
       .btn.icon-btn {
-        height: 28px;
-        width: 28px;
+        height: 32px;
+        width: 32px;
 
         svg {
           width: 16px;
@@ -325,6 +336,16 @@ main {
 }
 
 @media screen and (max-width: 430px) {
+  .file-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .folder-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 320px) {
   .file-grid {
     grid-template-columns: repeat(1, 1fr);
   }
