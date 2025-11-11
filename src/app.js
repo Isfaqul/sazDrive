@@ -36,4 +36,22 @@ app.use(passport.session());
 
 app.use("/", routes);
 
+// 404 handler (for any unspecified route)
+app.use((req, res, next) => {
+  res.status(404);
+
+  // If you have a custom 404 EJS page:
+  res.render("pages/404", { title: "Page Not Found" });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  res.status(err.status || 500);
+  res.render("pages/error", {
+    title: "Server Error",
+    message: err.message || "Something went wrong",
+  });
+});
+
 module.exports = app;
