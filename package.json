@@ -1,13 +1,13 @@
 {
-  "name": "mydrive",
+  "name": "sazdrive",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "A stripped down version of google drivet",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Isfaqul",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.19.0",
