@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/editForm.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">Saz <span>Drive</span></h1>
+    </nav>
+  </header>
+  <main>
+    <h2 class="hero-title">Update file name</h2>
+    <div class="form-container">
+      <form action="/drive/file/<%=file.id%>/edit" method="POST">
+        <div class="form-control">
+          <label for="fileName">File Name</label>
+          <input type="text" id="fileName" name="fileName" placeholder="Enter new name" value="<%= file.name %>" required>
+        </div>
+        <input type="hidden" name="fileId" value="<%= file.id %>">
+        <input type="hidden" name="folderId" value="<%= file.folderId %>">
+        <div class="error-container">
+          <% errors.forEach(error=>{ %>
+          <p class="error"><%= error.msg %></p>
+          <% }) %>
+        </div>
+        <div class="form-control form-action">
+          <a class="btn btn-secondary" href="<%= backUrl %>">Cancel</a>
+          <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>

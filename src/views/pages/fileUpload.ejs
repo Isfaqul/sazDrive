@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/upload.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <h1 class="logo">Saz <span>Drive</span></h1>
+      <form action="/auth/logout" method="POST">
+        <button class="btn btn-secondary" type="submit">Logout</button>
+      </form>
+    </nav>
+  </header>
+  <main>
+    <h2 class="hero-title">
+      Upload a file
+    </h2>
+    <div class="form-container">
+      <form action="/drive/upload" method="POST" enctype="multipart/form-data">
+        <div class="form-control">
+          <label for="file">Select a file</label>
+          <input type="file" name="file" id="file">
+        </div>
+        <input type="hidden" name="folderId" value="<%= folderId %>">
+        <div class="error-container">
+          <% errors.forEach(error => { %>
+          <p class="error"><%= error.msg %></p>
+          <% }) %>
+        </div>
+        <div class="form-control form-action">
+          <a class="btn btn-secondary" href="/">Cancel</a>
+          <button class="btn btn-primary" type="submit">Upload</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>

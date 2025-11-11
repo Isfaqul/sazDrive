@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/signup-login.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">Saz <span>Drive</span></h1>
+    </nav>
+  </header>
+  <main>
+    <h2 class="hero-title">Sign Up</h2>
+    <div class="form-container">
+      <form action="/auth/signup" method="POST">
+        <div class="form-control-row">
+          <div class="form-control">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+          </div>
+          <div class="form-control">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="johndoe" required>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="****************" required>
+        </div>
+        <div class="form-control">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="****************" required>
+        </div>
+        <div class="error-container">
+          <% errors.forEach(error=>{ %>
+          <p class="error"><%= error.msg %></p>
+          <% }) %>
+        </div>
+        <div class="form-control form-action">
+          <button class="btn btn-primary" type="submit">Sign Up</button>
+        </div>
+      </form>
+      <p class="message-link-to-login-signup">Already have an account? <a href="/auth/login">Log In</a></p>
+    </div>
+  </main>
+</body>
+
+</html>

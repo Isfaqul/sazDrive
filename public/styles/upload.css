@@ -1,0 +1,155 @@
+@import url("common.css");
+
+header,
+main {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+header {
+  padding: 0 1em;
+  margin-bottom: 2em;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 0;
+    border-bottom: 1px solid var(--light-hr);
+
+    .logo {
+      font-weight: 600;
+      font-size: 2.4rem;
+      font-style: italic;
+      color: var(--logo);
+
+      span {
+        font-weight: 200;
+        margin-left: -0.29em;
+      }
+    }
+
+    .logout-btn {
+      border: 0.5px solid var(--input-border);
+    }
+  }
+}
+
+main {
+  max-width: 480px;
+  padding: 0 1em;
+
+  .hero-title {
+    font-family: var(--font-sofia);
+    font-size: 6rem;
+    font-weight: 300;
+    color: var(--light-body-txt);
+    margin-bottom: 0.5em;
+  }
+}
+
+.form-container {
+  background-color: var(--form-bg);
+  border: 0.5px solid var(--form-border);
+  padding: 5em;
+}
+
+form {
+  color: var(--light-body-txt);
+
+  label,
+  input {
+    display: block;
+    font-size: 1.4rem;
+    width: 100%;
+  }
+
+  .form-control-row {
+    display: flex;
+    gap: 1em;
+
+    .form-control {
+      flex: 1;
+    }
+  }
+
+  label {
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
+  .form-control:not(:last-of-type) {
+    margin-bottom: 2em;
+  }
+
+  .error-container {
+    margin-top: 2em;
+  }
+
+  .form-control.form-action {
+    margin-top: 3em;
+    margin-bottom: 2em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  input {
+    font-family: "Inter", sans-serif;
+    padding: 0.6em 0.5em;
+    background-color: var(--input-bg);
+    border: 0.5px solid var(--input-border);
+    color: var(--white);
+    border-radius: 7px;
+
+    &::placeholder {
+      color: var(--input-placeholder);
+    }
+
+    &:focus {
+      outline: 1px solid var(--input-focus-outline);
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+  }
+
+  .error {
+    font-size: 1.2rem;
+    color: var(--error-txt);
+  }
+}
+
+.message-link-to-login-signup {
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--light-body-txt);
+
+  a {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  header {
+    margin-bottom: 2em;
+  }
+
+  main {
+    padding: 0 1em;
+
+    .hero-title {
+      font-size: 5rem;
+    }
+  }
+
+  .form-container {
+    padding: 2em;
+  }
+}

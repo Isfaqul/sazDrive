@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sofia+Sans+Extra+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap");
+
+:root {
+  --bg-color: #202127;
+
+  --form-bg: #070b13;
+  --form-border: #1a1b30;
+
+  --white: #fff;
+
+  --logo: #5898ff;
+
+  --btn-primary: #5744ee;
+  --btn-primary-hover: #4232c7;
+  --btn-primary-active: #3527a5;
+
+  --btn-secondary-hover: #1c2028;
+  --btn-secondary-active: #14161c;
+
+  --light-hr: #2b304e;
+
+  --folder-icon: #4f5665;
+  --folder-file-bg: #1c2028;
+  --folder-file-bg-hover: #242933;
+  --folder-file-txt: #10214f;
+
+  --light-body-txt: #96b6f5;
+
+  --input-bg: #1c2028;
+  --input-border: #31343c;
+  --input-placeholder: #4c566a;
+  --input-focus-outline: rgba(255, 255, 255, 0.7);
+
+  --error-txt: #b22c2e;
+
+  /* InfoView */
+  --infoView-header: #e2e2e2;
+  --infoView-body: #ababab;
+
+  /* Font Family */
+  --font-inter: "Inter", sans-serif;
+  --font-sofia: "Sofia Sans Extra Condensed", sans-serif;
+}

@@ -1,0 +1,82 @@
+@import url("common.css");
+
+header,
+main {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+header {
+  padding: 0 1em;
+  margin-bottom: 2em;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 0;
+    border-bottom: 1px solid var(--light-hr);
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      .nav-link {
+        color: var(--white);
+      }
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 2.4rem;
+      font-style: italic;
+      color: var(--logo);
+
+      span {
+        font-weight: 200;
+        margin-left: -0.29em;
+      }
+    }
+
+    .logout-btn {
+      border: 0.5px solid var(--input-border);
+    }
+  }
+}
+
+main {
+  padding: 0 1em;
+  padding-bottom: 1em;
+
+  .hero-title {
+    font-family: var(--font-sofia);
+    font-size: 9rem;
+    text-align: center;
+    font-weight: 300;
+    color: var(--light-body-txt);
+  }
+
+  .error-message {
+    color: var(--light-body-txt);
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 200;
+  }
+
+  .btn.btn-secondary {
+    margin-top: 4em;
+    width: max-content;
+    margin-inline: auto;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  main {
+    .hero-title-row {
+      .hero-title {
+        text-align: left;
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/home.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <h1 class="logo">Saz <span>Drive</span></h1>
+      <div class="nav-right">
+        <a class="nav-link" href="/">Home</a>
+        <form action="/auth/logout" method="POST">
+          <button class="btn btn-secondary" type="submit">Logout</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <hgroup class="hero-title-row">
+      <h2 class="hero-title">Welcome, <%= name %></h2>
+      <div class="hero-action">
+        <a class="btn btn-secondary icon-btn" href="/drive/folder/create">
+          + Add Folder
+        </a>
+        <a class="btn btn-primary icon-btn" href="/drive/upload">
+          + Add File
+        </a>
+      </div>
+    </hgroup>
+    <% if (!files.length && !folders.length) { %>
+    <div class="empty-display">
+      <p>Nothing to see here. Add something!</p>
+    </div>
+    <%}%>
+    <div class="folder-grid">
+      <% folders.forEach(folder => {%>
+    <%- include("../partials/folder", {folder: folder}) %>
+    <% }) %>
+    </div>
+    <div class="file-grid">
+      <% files.forEach(file => {%>
+      <%- include("../partials/file", {file: file}) %>
+      <% }) %>
+    </div>
+  </main>
+</body>
+
+</html>

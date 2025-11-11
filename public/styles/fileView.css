@@ -1,0 +1,204 @@
+@import url("common.css");
+
+header,
+main {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+header {
+  padding: 0 1em;
+  margin-bottom: 2em;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 0;
+    border-bottom: 1px solid var(--light-hr);
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      .nav-link {
+        color: var(--white);
+      }
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 2.4rem;
+      font-style: italic;
+      color: var(--logo);
+
+      span {
+        font-weight: 200;
+        margin-left: -0.29em;
+      }
+    }
+
+    .logout-btn {
+      border: 0.5px solid var(--input-border);
+    }
+  }
+}
+
+main {
+  padding: 0 1em;
+  padding-bottom: 1em;
+
+  .hero-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+
+    .hero-title-row-left {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      .btn.icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.38em;
+      }
+    }
+
+    .hero-title {
+      font-family: var(--font-inter);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--light-body-txt);
+    }
+
+    .hero-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+
+      .btn.btn-secondary {
+        text-decoration: none;
+        padding-block: 0.85em;
+      }
+    }
+  }
+}
+
+.file-view-wrapper {
+  /* border: 1px solid rgb(133, 202, 216); */
+  display: flex;
+  gap: 1em;
+
+  .fileView {
+    border-radius: 7px;
+    padding: 1em;
+    flex-grow: 1;
+    border: 0.5px solid var(--input-border);
+    background-color: var(--folder-file-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      display: block;
+      max-height: 500px;
+      object-fit: contain;
+    }
+  }
+
+  .infoView {
+    border-radius: 7px;
+    padding: 1em 1.5em;
+    min-width: 250px;
+    border: 0.5px solid var(--input-border);
+    background-color: var(--folder-file-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .btn,
+    a {
+      width: 100%;
+    }
+
+    .fileView-action {
+      .fileView-action-row {
+        margin-bottom: 1em;
+        display: flex;
+        gap: 1em;
+
+        form {
+          flex: 1;
+        }
+      }
+
+      .download-button-form {
+        .btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5em;
+        }
+      }
+    }
+
+    .infoView-header {
+      color: var(--infoView-header);
+      font-weight: 400;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .info-item {
+      margin-bottom: 21px;
+
+      .info-item-title {
+        color: var(--infoView-header);
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin-bottom: 3px;
+      }
+
+      .info-item-detail {
+        color: var(--infoView-body);
+        font-size: 1.2rem;
+        font-weight: 300;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  main {
+    .hero-title-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2em;
+
+      .hero-title {
+        text-align: left;
+      }
+
+      .hero-action {
+        width: 100%;
+
+        .btn {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .file-view-wrapper {
+    flex-direction: column;
+  }
+}

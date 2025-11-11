@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/signup-login.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">Saz <span>Drive</span></h1>
+    </nav>
+  </header>
+  <main>
+    <h2 class="hero-title">Log In</h2>
+    <div class="form-container">
+      <form action="/auth/login" method="POST">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Your username" required>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="****************" required>
+        </div>
+        <div class="error-container">
+          <% errors.forEach(error=>{ %>
+          <p class="error"><%= error.msg %></p>
+          <% }) %>
+        </div>
+        <div class="form-control form-action">
+          <button class="btn btn-primary" type="submit">Log In</button>
+        </div>
+      </form>
+      <p class="message-link-to-login-signup">Don't have an account? <a href="/auth/signup">Sign Up</a></p>
+    </div>
+  </main>
+</body>
+
+</html>

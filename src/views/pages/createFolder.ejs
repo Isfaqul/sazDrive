@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/upload.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <h1 class="logo">Saz <span>Drive</span></h1>
+      <form action="/auth/logout" method="POST">
+        <button class="btn btn-secondary" type="submit">Logout</button>
+      </form>
+    </nav>
+  </header>
+  <main>
+    <h2 class="hero-title">
+      Create a folder
+    </h2>
+    <div class="form-container">
+      <form action="/drive/folder/create" method="POST">
+        <div class="form-control">
+          <label for="folderName">Name</label>
+          <input type="text" name="folderName" id="folderName" placeholder="Example" required>
+        </div>
+        <div class="error-container">
+          <% errors.forEach(error => { %>
+          <p class="error"><%= error.msg %></p>
+          <% }) %>
+        </div>
+        <div class="form-control form-action">
+          <a class="btn btn-secondary" href="/">Cancel</a>
+          <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>
