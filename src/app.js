@@ -1,5 +1,5 @@
 require("dotenv").config();
-const path = require("node:path");
+const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
@@ -15,7 +15,7 @@ const app = express(); // Init app
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
