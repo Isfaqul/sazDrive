@@ -5,7 +5,10 @@ const {
   formatDate,
   getFileBufferForDownload,
 } = require("../utils/util");
-const { folderNameValidation, validationResult } = require("../middlewares/validator");
+const {
+  folderNameValidation,
+  validationResult,
+} = require("../middlewares/validator");
 const { prisma } = require("../config/prisma");
 const supabase = require("../config/supabase");
 const upload = require("../middlewares/multer");
@@ -35,17 +38,17 @@ const allDataGet = async (req, res, next) => {
         userId: req.user.id,
       },
     });
+
+    res.render("pages/driveHome", {
+      title: "Home",
+      folders: folders,
+      files: files,
+      isLoggedIn: req.user ? true : false,
+      name: req.user.firstName,
+    });
   } catch (error) {
     res.status(500).render("pages/404", { title: "Error", error });
   }
-
-  res.render("pages/driveHome", {
-    title: "Home",
-    folders: folders,
-    files: files,
-    isLoggedIn: req.user ? true : false,
-    name: req.user.firstName,
-  });
 };
 
 const folderGet = async (req, res, next) => {
@@ -101,7 +104,10 @@ const createFolderPost = [
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("pages/createFolder", { title: "Create folder", errors: errors.array() });
+      res.render("pages/createFolder", {
+        title: "Create folder",
+        errors: errors.array(),
+      });
       return;
     }
 
@@ -123,7 +129,11 @@ const uploadFileGet = (req, res, next) => {
     return;
   }
 
-  res.render("pages/fileUpload", { title: "Upload your file", errors: [], folderId: req.query.folderId || null });
+  res.render("pages/fileUpload", {
+    title: "Upload your file",
+    errors: [],
+    folderId: req.query.folderId || null,
+  });
 };
 
 const uploadFilePost = [
@@ -186,9 +196,8 @@ const uploadFilePost = [
       if (uploadError) throw uploadError;
 
       // Get public url
-      const { data: publicUrlData, error: publicUrlError } = await supabase.storage
-        .from("uploads")
-        .getPublicUrl(uploadData.path);
+      const { data: publicUrlData, error: publicUrlError } =
+        await supabase.storage.from("uploads").getPublicUrl(uploadData.path);
 
       if (publicUrlError) throw publicUrlError;
 
@@ -297,7 +306,8 @@ const folderDeletePost = async (req, res, next) => {
       filePaths.push(path);
     });
 
-    const { data: fileDeleteData, error: filesDeleteError } = await supabase.storage.from("uploads").remove(filePaths);
+    const { data: fileDeleteData, error: filesDeleteError } =
+      await supabase.storage.from("uploads").remove(filePaths);
     if (filesDeleteError) throw filesDeleteError;
 
     // Delete files first
@@ -342,9 +352,12 @@ const fileDeletePost = async (req, res, next) => {
     if (userId !== req.user.id) throw new Error("Unauthorized!");
 
     // Build file path
-    const FILE_PATH = folderId ? `${req.user.id}/${folderId}/${name}` : `${req.user.id}/${name}`;
+    const FILE_PATH = folderId
+      ? `${req.user.id}/${folderId}/${name}`
+      : `${req.user.id}/${name}`;
 
-    const { data: removeFileData, error: removeFileError } = await supabase.storage.from("uploads").remove(FILE_PATH);
+    const { data: removeFileData, error: removeFileError } =
+      await supabase.storage.from("uploads").remove(FILE_PATH);
     if (removeFileError) throw removeFileError;
 
     await prisma.file.delete({
@@ -381,9 +394,13 @@ const downloadFilePost = async (req, res, next) => {
     if (userId !== req.user.id) throw new Error("Unauthorized!");
 
     // Build file path for download
-    const FILE_PATH = folderId ? `${req.user.id}/${folderId}/${name}` : `${req.user.id}/${name}`;
+    const FILE_PATH = folderId
+      ? `${req.user.id}/${folderId}/${name}`
+      : `${req.user.id}/${name}`;
 
-    const { data: downloadData, error: downloadError } = await supabase.storage.from("uploads").download(FILE_PATH);
+    const { data: downloadData, error: downloadError } = await supabase.storage
+      .from("uploads")
+      .download(FILE_PATH);
     if (downloadError) throw downloadError;
 
     const dowloadFile = await getFileBufferForDownload(downloadData);
@@ -415,9 +432,13 @@ const fileViewGet = async (req, res, next) => {
       },
     });
 
-    const FILE_PATH = folderId ? `${userId}/${folderId}/${image.name}` : `${userId}/${image.name}`;
+    const FILE_PATH = folderId
+      ? `${userId}/${folderId}/${image.name}`
+      : `${userId}/${image.name}`;
 
-    const { data: imageInfo, error: imageInfoError } = await supabase.storage.from("uploads").info(FILE_PATH);
+    const { data: imageInfo, error: imageInfoError } = await supabase.storage
+      .from("uploads")
+      .info(FILE_PATH);
     console.log(imageInfo);
 
     const metaData = {
@@ -585,24 +606,25 @@ const editFilePost = async (req, res, next) => {
       newFileName = path.basename(newFileName, path.extname(newFileName)) + ext;
     }
 
-    const CURRENT_PATH = folderId ? `${userId}/${folderId}/${currentFileName}` : `${userId}/${currentFileName}`;
-    const RENAMED_PATH = folderId ? `${userId}/${folderId}/${newFileName}` : `${userId}/${newFileName}`;
+    const CURRENT_PATH = folderId
+      ? `${userId}/${folderId}/${currentFileName}`
+      : `${userId}/${currentFileName}`;
+    const RENAMED_PATH = folderId
+      ? `${userId}/${folderId}/${newFileName}`
+      : `${userId}/${newFileName}`;
 
-    const { data: nameUpdateData, error: nameUpdateError } = await supabase.storage
-      .from("uploads")
-      .move(CURRENT_PATH, RENAMED_PATH);
+    const { data: nameUpdateData, error: nameUpdateError } =
+      await supabase.storage.from("uploads").move(CURRENT_PATH, RENAMED_PATH);
 
     if (nameUpdateError) throw nameUpdateError;
 
-    const { data: updatedFileData, error: updatedFileError } = await supabase.storage
-      .from("uploads")
-      .getPublicUrl(RENAMED_PATH);
+    const { data: updatedFileData, error: updatedFileError } =
+      await supabase.storage.from("uploads").getPublicUrl(RENAMED_PATH);
 
     if (updatedFileError) throw updatedFileError;
 
-    const { data: updatedFileNameData, error: updatedFileNameDataError } = await supabase.storage
-      .from("uploads")
-      .info(RENAMED_PATH);
+    const { data: updatedFileNameData, error: updatedFileNameDataError } =
+      await supabase.storage.from("uploads").info(RENAMED_PATH);
 
     if (updatedFileNameDataError) throw updatedFileNameDataError;
 
