@@ -18,17 +18,31 @@ const getAllFolders = async (path) => {
   return folders;
 };
 
-const createFolder = async (folderName, userId) => {
-  return prisma.folder.create({
-    data: {
-      name: folderName,
-      user: {
-        connect: {
-          id: userId,
+const createFolder = async (folderName, userId, parentId = null) => {
+  const query = parentId
+    ? prisma.folder.create({
+        data: {
+          name: folderName,
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+          ...(parentId && { parent: { connect: { id: parentId } } }),
         },
-      },
-    },
-  });
+      })
+    : prisma.folder.create({
+        data: {
+          name: folderName,
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+        },
+      });
+
+  return query;
 };
 
 const getUploadableFile = (file) => {

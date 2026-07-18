@@ -57,28 +57,49 @@ const folderGet = async (req, res, next) => {
     return;
   }
 
+  const folderId = +req.params.folderId;
   let currentFolder;
   let files = [];
+  let folders = [];
 
   try {
     currentFolder = await prisma.folder.findFirst({
       where: {
-        id: +req.params.folderId,
+        id: folderId,
+        userId: req.user.id,
+      },
+    });
+
+    if (!currentFolder) {
+      res.status(404).render("pages/404", { title: "Folder Not Found" });
+      return;
+    }
+
+    folders = await prisma.folder.findMany({
+      where: {
+        parentId: folderId,
+        userId: req.user.id,
       },
     });
 
     files = await prisma.file.findMany({
       where: {
         userId: req.user.id,
-        folderId: +req.params.folderId,
+        folderId: folderId,
       },
     });
+
+    const backUrl = currentFolder.parentId
+      ? `/drive/folder/${currentFolder.parentId}`
+      : "/drive";
 
     res.render("pages/dynamicFolderView", {
       title: currentFolder.name,
       folderId: currentFolder.id,
+      folders: folders,
       files: files,
       isLoggedIn: req.user ? true : false,
+      backUrl,
     });
   } catch (error) {
     res.status(500).render("pages/404", { title: "Error", error });
@@ -91,7 +112,15 @@ const createFolderGet = (req, res, next) => {
     return;
   }
 
-  res.render("pages/createFolder", { title: "Create folder", errors: [] });
+  const parentFolderId = req.params.folderId ? +req.params.folderId : null;
+  const backUrl = parentFolderId ? `/drive/folder/${parentFolderId}` : "/drive";
+
+  res.render("pages/createFolder", {
+    title: "Create folder",
+    parentFolderId,
+    backUrl,
+    errors: [],
+  });
 };
 
 const createFolderPost = [
@@ -102,22 +131,36 @@ const createFolderPost = [
       return;
     }
 
+    const parentFolderId = req.params.folderId ? +req.params.folderId : null;
+    const backUrl = parentFolderId
+      ? `/drive/folder/${parentFolderId}`
+      : "/drive";
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.render("pages/createFolder", {
         title: "Create folder",
         errors: errors.array(),
+        parentFolderId,
+        backUrl,
       });
       return;
     }
 
     try {
-      const folderData = await createFolder(req.body.folderName, req.user.id);
-      res.redirect(`${folderData.id}`);
+      const folderData = await createFolder(
+        req.body.folderName,
+        req.user.id,
+        parentFolderId,
+      );
+
+      res.redirect(`/drive/folder/${folderData.id}`);
     } catch (error) {
       res.render("pages/createFolder", {
         title: "Create folder",
         errors: [{ msg: "Unable to create folder. Please try again." }],
+        parentFolderId,
+        backUrl,
       });
     }
   },
@@ -448,7 +491,14 @@ const fileViewGet = async (req, res, next) => {
       "Uploaded On": formatDate(imageInfo.createdAt),
     };
 
-    res.render("pages/fileView", { title: "FileName", metaData, file: image });
+    const backUrl = folderId ? `/drive/folder/${folderId}` : "/drive";
+
+    res.render("pages/fileView", {
+      title: "FileName",
+      metaData,
+      file: image,
+      backUrl,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).render("pages/404", { title: "Error", error });
